@@ -1,0 +1,27 @@
+version: '3'
+services:
+  school-service:
+    build: './school-service'
+    depends_on:
+      - school-service-db
+    volumes:
+      - ./school-service:/opt/app
+
+  school-service-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
+    image: mysql:5.7.20
+
+  users-service:
+    build: './users-service'
+    depends_on:
+      - users-service-db
+    volumes:
+      - ./users-service:/opt/app
+
+  users-service-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
+    image: mysql:5.7.20
