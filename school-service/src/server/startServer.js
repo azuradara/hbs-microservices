@@ -1,15 +1,18 @@
 import cors from 'cors';
 import express from 'express';
+import bodyParser from 'body-parser';
 
 import getEnv from '#root/helpers/getEnv';
 
 import setupRoutes from './routes';
-
 const PORT = getEnv('PORT', 7100);
 
 const app = express();
 
 /** MIDDLEWARE */
+app.use(bodyParser.json());
+
+app.use(express.bodyParser());
 
 app.use(
   cors({

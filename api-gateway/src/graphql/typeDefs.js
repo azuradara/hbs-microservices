@@ -12,6 +12,15 @@ const typeDefs = gql`
     branch: String!
   }
 
+  type User {
+    id: ID!
+    email: String!
+  }
+
+  type Mutation {
+    createUser(email: String!, password: String!): User!
+  }
+
   type Query {
     students: [Student!]!
   }
