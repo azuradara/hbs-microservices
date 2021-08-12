@@ -24,9 +24,23 @@ module.exports.up = (queryInterface, DataTypes) => {
         allowNull: false,
         type: DataTypes.DECIMAL(5, 4),
       },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      deletedAt: {
+        allowNull: true,
+        type: DataTypes.DATE,
+      },
     },
     {
       charset: 'utf8',
     }
   );
 };
+
+module.exports.down = (queryInterface) => queryInterface.dropTable('modules');

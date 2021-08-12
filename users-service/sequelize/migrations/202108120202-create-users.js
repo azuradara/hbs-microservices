@@ -1,28 +1,20 @@
 module.exports.up = (queryInterface, DataTypes) => {
   return queryInterface.createTable(
-    'junction',
+    'users',
     {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.UUID,
       },
-      moduleId: {
+      email: {
         allowNull: false,
-        type: DataTypes.INTEGER.UNSIGNED,
-        references: {
-          model: 'modules',
-          key: 'id',
-        },
+        unique: true,
+        type: DataTypes.STRING,
       },
-      studentId: {
+      passwordHash: {
         allowNull: false,
-        type: DataTypes.INTEGER.UNSIGNED,
-        references: {
-          model: 'students',
-          key: 'id',
-        },
+        type: DataTypes.CHAR(64),
       },
       createdAt: {
         allowNull: false,
@@ -43,4 +35,4 @@ module.exports.up = (queryInterface, DataTypes) => {
   );
 };
 
-module.exports.down = (queryInterface) => queryInterface.dropTable('junction');
+module.exports.down = (queryInterface) => queryInterface.dropTable('users');
