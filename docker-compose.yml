@@ -1,11 +1,23 @@
 version: '3'
 services:
+  api-gateway:
+    build: './api-gateway'
+    depends_on:
+      - school-service
+      - users-service
+    ports:
+      - 7000:7000
+    volumes:
+      - ./api-gateway:/opt/app
+
   school-service:
     build: './school-service'
     depends_on:
       - school-service-db
     environment:
       - DB_URI=mysql://root:password@school-service-db/db?charset=UTF8
+    ports:
+      - 7100:7100
     volumes:
       - ./school-service:/opt/app
 
@@ -23,6 +35,8 @@ services:
       - users-service-db
     environment:
       - DB_URI=mysql://root:password@users-service-db/db?charset=UTF8
+    ports:
+      - 7101:7101
     volumes:
       - ./users-service:/opt/app
 
