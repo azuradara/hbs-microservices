@@ -6,6 +6,13 @@ const professorRoutes = (app) => {
     return res.json(professors);
   });
 
+  app.get('/professors/:professorId/modules', async (req, res, next) => {
+    const professor = await Professor.findByPk(req.params.professorId);
+    if (!professor) return next(new Error('Invalid professor ID.'));
+
+    res.json(await professor.getModules());
+  });
+
   app.post('/professors', async (req, res, next) => {
     if (
       !req.body.fullName ||

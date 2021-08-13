@@ -1,9 +1,16 @@
-import { Student } from '#root/db/models';
+import { Student, Module } from '#root/db/models';
 
 const studentRoutes = (app) => {
   app.get('/students', async (req, res, next) => {
     const students = await Student.findAll();
     return res.json(students);
+  });
+
+  app.get('/students/:studentId/modules', async (req, res, next) => {
+    const student = await Student.findByPk(req.params.studentId);
+    if (!student) return next(new Error('Invalid student ID.'));
+
+    res.json(await student.getModules());
   });
 
   app.post('/students', async (req, res, next) => {

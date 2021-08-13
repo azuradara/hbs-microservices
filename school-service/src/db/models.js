@@ -87,7 +87,8 @@ const defineRelations = () => {
     onUpdate: 'CASCADE',
   });
 
-  Module.hasOne(Professor, common({ foreignKey: 'professorId' }));
+  Module.belongsTo(Professor, common({ foreignKey: 'professorId' }));
+  Professor.hasMany(Module);
 
   Student.belongsToMany(Module, {
     through: 'junctions',

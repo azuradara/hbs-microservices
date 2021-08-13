@@ -15,7 +15,7 @@ const typeDefs = gql`
 
   type Professor {
     id: ID!
-    fullname: String!
+    fullName: String!
     cin: String!
     matricule: String!
     registrationDate: Date!
