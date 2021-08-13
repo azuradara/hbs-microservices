@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
 import gqlClient from '#root/api/graphqlClient';
@@ -34,6 +34,7 @@ const query = gql`
 const Initialised = () => {
   const dispatch = useDispatch();
 
+  const session = useSelector((state) => state.session);
   const [init, setInit] = useState(false);
 
   useEffect(() => {
@@ -50,12 +51,17 @@ const Initialised = () => {
   return (
     <Switch>
       <PrivateRoute
-        allowVisit={false}
+        allowVisit={!session}
         component={Login}
         path="/login"
         redirectTo="/"
       />
-      <Route component={Main} path="/" />
+      <PrivateRoute
+        allowVisit={!!session}
+        component={Main}
+        path="/"
+        redirectTo="/login"
+      />
     </Switch>
   );
 };

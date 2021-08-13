@@ -3,12 +3,12 @@ import { Redirect, Route } from 'react-router-dom';
 
 const PrivateRoute = ({
   allowVisit,
-  component,
+  component: Component,
   redirectTo,
   render,
   ...rest
 }) => {
-  const renderedComponent = component
+  const renderedComponent = Component
     ? (props) => <Component {...props} />
     : render && render;
 
