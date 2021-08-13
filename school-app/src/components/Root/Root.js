@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Route, Switch } from 'react-router';
+
+import Login from './Login';
 
 const Wrapper = styled.div`
   height: 100%;
@@ -17,7 +20,11 @@ const Container = styled.div`
 const Root = () => {
   return (
     <Wrapper>
-      <Container>gooba</Container>
+      <Container>
+        <Switch>
+          <Route component={Login} path="/login" />
+        </Switch>
+      </Container>
     </Wrapper>
   );
 };
