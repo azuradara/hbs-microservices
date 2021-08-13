@@ -65,6 +65,7 @@ const typeDefs = gql`
     ): Student!
 
     updateStudent(
+      studentId: ID!
       fullName: String
       cin: String
       birthDate: Date
@@ -76,14 +77,15 @@ const typeDefs = gql`
 
     # PROFESSORS
     createProfessor(
-      fullname: String!
+      fullName: String!
       cin: String!
       matricule: String!
       registrationDate: Date!
     ): Professor!
 
     updateProfessor(
-      fullname: String
+      professorId: ID!
+      fullName: String
       cin: String
       matricule: String
       registrationDate: Date
@@ -99,6 +101,7 @@ const typeDefs = gql`
     ): Module!
 
     updateModule(
+      moduleId: ID!
       moduleName: String
       coefficient: Float
       professorId: ID

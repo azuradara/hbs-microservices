@@ -15,6 +15,8 @@ module.exports.up = (queryInterface, DataTypes) => {
           model: 'professors',
           key: 'id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       moduleName: {
         allowNull: false,

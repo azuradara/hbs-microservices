@@ -9,6 +9,14 @@ export default class SchoolService {
     return body;
   }
 
+  static async fetchModulesByStudent({ studentId }) {
+    const body = await got
+      .get(`${SCHOOL_SERVICE_URI}/students/${studentId}/modules`)
+      .json();
+
+    return body;
+  }
+
   static async createStudent({
     fullName,
     cin,
@@ -25,10 +33,60 @@ export default class SchoolService {
     return body;
   }
 
+  static async updateStudent(payload) {
+    const body = await got
+      .put(`${SCHOOL_SERVICE_URI}/students/${payload.studentId}`, {
+        json: { ...payload },
+      })
+      .json();
+
+    return body;
+  }
+
+  static async deleteStudent({ studentId }) {
+    await got.delete(`${SCHOOL_SERVICE_URI}/students/${studentId}`).json();
+
+    return true;
+  }
+
   /** PROFESSORS */
   static async fetchAllProfessors() {
     const body = await got.get(`${SCHOOL_SERVICE_URI}/professors`).json();
     return body;
+  }
+
+  static async fetchModulesByProfessor({ professorId }) {
+    const body = await got
+      .get(`${SCHOOL_SERVICE_URI}/professors/${professorId}/modules`)
+      .json();
+
+    return body;
+  }
+
+  static async createProfessor({ fullName, cin, matricule, registrationDate }) {
+    const body = await got
+      .post(`${SCHOOL_SERVICE_URI}/professors`, {
+        json: { fullName, cin, matricule, registrationDate },
+      })
+      .json();
+
+    return body;
+  }
+
+  static async updateProfessor(payload) {
+    const body = await got
+      .put(`${SCHOOL_SERVICE_URI}/professors/${payload.professorId}`, {
+        json: { ...payload },
+      })
+      .json();
+
+    return body;
+  }
+
+  static async deleteProfessor({ professorId }) {
+    await got.delete(`${SCHOOL_SERVICE_URI}/professors/${professorId}`).json();
+
+    return true;
   }
 
   /** MODULES */
@@ -37,11 +95,46 @@ export default class SchoolService {
     return body;
   }
 
-  static async fetchModulesByStudent({ studentId }) {
+  static async createModule(payload) {
     const body = await got
-      .get(`${SCHOOL_SERVICE_URI}/students/${studentId}/modules`)
+      .post(`${SCHOOL_SERVICE_URI}/modules`, {
+        json: { ...payload },
+      })
       .json();
 
     return body;
+  }
+
+  static async deleteModule({ moduleId }) {
+    await got.delete(`${SCHOOL_SERVICE_URI}/modules/${moduleId}`).json();
+
+    return true;
+  }
+
+  static async updateModule(payload) {
+    const body = await got
+      .put(`${SCHOOL_SERVICE_URI}/modules/${payload.moduleId}`, {
+        json: { ...payload },
+      })
+      .json();
+
+    return body;
+  }
+
+  /** JUNCTIONS */
+  static async createJunction({ studentId, moduleId }) {
+    const body = await got
+      .post(`${SCHOOL_SERVICE_URI}/modules/${moduleId}/students/${studentId}`)
+      .json();
+
+    return body;
+  }
+
+  static async deleteJunction({ studentId, moduleId }) {
+    await got
+      .delete(`${SCHOOL_SERVICE_URI}/modules/${moduleId}/students/${studentId}`)
+      .json();
+
+    return true;
   }
 }

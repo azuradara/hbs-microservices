@@ -80,7 +80,7 @@ const moduleRoutes = (app) => {
 
       module.addStudent(req.params.studentId);
 
-      return res.end();
+      return res.json(true);
     } catch (e) {
       return next(e);
     }

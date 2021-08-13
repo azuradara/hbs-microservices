@@ -51,7 +51,7 @@ const professorRoutes = (app) => {
 
   app.delete('/professors/:professorId', async (req, res, next) => {
     try {
-      const professor = await Professor.findByPk(req.params.professorid);
+      const professor = await Professor.findByPk(req.params.professorId);
       if (!professor) return next(new Error('Invalid professor ID.'));
 
       await professor.destroy();
