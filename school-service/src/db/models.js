@@ -58,7 +58,7 @@ export class Module extends Model {}
 Module.init(
   {
     professorId: {
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'professors',
         key: 'id',

@@ -1,6 +1,6 @@
 module.exports.up = (queryInterface, DataTypes) => {
   return queryInterface.createTable(
-    'junction',
+    'junctions',
     {
       id: {
         allowNull: false,
