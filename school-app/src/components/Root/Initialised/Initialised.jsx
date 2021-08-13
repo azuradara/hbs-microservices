@@ -11,6 +11,7 @@ import PrivateRoute from '#utils/components/routing/PrivateRoute';
 
 import Login from './Login';
 import Main from './Main';
+import FullScreen from '../../shared/FullScreen';
 
 const Container = styled.div`
   display: flex;
@@ -49,20 +50,22 @@ const Initialised = () => {
   if (!init) return 'Loading..';
 
   return (
-    <Switch>
-      <PrivateRoute
-        allowVisit={!session}
-        component={Login}
-        path="/login"
-        redirectTo="/"
-      />
-      <PrivateRoute
-        allowVisit={!!session}
-        component={Main}
-        path="/"
-        redirectTo="/login"
-      />
-    </Switch>
+    <FullScreen>
+      <Switch>
+        <PrivateRoute
+          allowVisit={!session}
+          component={Login}
+          path="/login"
+          redirectTo="/"
+        />
+        <PrivateRoute
+          allowVisit={!!session}
+          component={Main}
+          path="/"
+          redirectTo="/login"
+        />
+      </Switch>
+    </FullScreen>
   );
 };
 

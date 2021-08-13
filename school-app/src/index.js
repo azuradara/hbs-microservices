@@ -11,9 +11,9 @@ import Root from '#root/components/Root';
 
 import store from './store';
 import * as theme from './theme';
+import '#root/styles/globals.css';
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap');
 
   html, body, #app {
     height: 100%;
@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    font-family: Inter, sans-serif;
+    font-family: Poppins, sans-serif;
   }
 
   *, *::after, *::before {

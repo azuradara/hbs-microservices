@@ -1,2 +1,3 @@
 export const white = '#FFFFFF';
-export const persianIndigo = '#41106E';
+export const offWhite = '#E5E7EB';
+export const christalle = '#41106E';
