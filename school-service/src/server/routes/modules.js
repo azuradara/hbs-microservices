@@ -2,7 +2,7 @@ import { Module, Professor, Junction, Student } from '#root/db/models';
 
 const moduleRoutes = (app) => {
   app.get('/modules', async (req, res, next) => {
-    const modules = await Module.findAll();
+    const modules = await Module.findAll({ include: [Student] });
     return res.json(modules);
   });
 
@@ -60,20 +60,27 @@ const moduleRoutes = (app) => {
   /** JUNCTIONS */
   app.post('/modules/:moduleId/students/:studentId', async (req, res, next) => {
     try {
+      if (!req.params.studentId || !req.params.moduleId)
+        return next(new Error('Invalid parameters.'));
+
       const module = await Module.findByPk(req.params.moduleId);
       if (!module) return next(new Error('Invalid module ID.'));
 
-      if (req.params.studentId) {
-        const student = await Student.findByPk(req.params.studentId);
-        if (!student) return next(new Error('Invalid student ID.'));
-      }
+      const student = await Student.findByPk(req.params.studentId);
+      if (!student) return next(new Error('Invalid student ID.'));
 
-      const junction = await Junction.create({
-        moduleId: req.params.moduleId,
-        studentId: req.params.studentId,
+      const junction = await Junction.findOne({
+        where: {
+          studentId: req.params.studentId,
+          moduleId: req.params.moduleId,
+        },
       });
+      if (junction)
+        return next(new Error('Student already attends this module.'));
 
-      return res.json(junction);
+      module.addStudent(req.params.studentId);
+
+      return res.end();
     } catch (e) {
       return next(e);
     }
@@ -83,14 +90,16 @@ const moduleRoutes = (app) => {
     '/modules/:moduleId/students/:studentId',
     async (req, res, next) => {
       try {
+        if (!req.params.studentId || !req.params.moduleId)
+          return next(new Error('Invalid parameters.'));
+
         const junction = await Junction.findOne({
           where: {
-            moduleId: req.params.moduleId,
             studentId: req.params.studentId,
+            moduleId: req.params.moduleId,
           },
         });
-
-        if (!junction) return next(new Error('Invalid Module or Student ID.'));
+        if (!junction) return next(new Error('Invalid module or student ID.'));
 
         await junction.destroy();
 

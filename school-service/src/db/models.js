@@ -1,7 +1,6 @@
 /** Put all the models in a single file to save time */
 
 import { DataTypes, Model } from 'sequelize';
-
 import sequelize from './connection';
 
 export class Student extends Model {}
@@ -57,14 +56,6 @@ Professor.init(
 export class Module extends Model {}
 Module.init(
   {
-    professorId: {
-      allowNull: true,
-      references: {
-        model: 'professors',
-        key: 'id',
-      },
-      type: DataTypes.INTEGER.UNSIGNED,
-    },
     moduleName: {
       allowNull: false,
       type: DataTypes.STRING,
@@ -78,24 +69,38 @@ Module.init(
 );
 
 export class Junction extends Model {}
-Junction.init(
-  {
-    moduleId: {
-      allowNull: false,
-      references: {
-        model: 'modules',
-        key: 'id',
-      },
-      type: DataTypes.INTEGER.UNSIGNED,
-    },
-    studentId: {
-      allowNull: false,
-      references: {
-        model: 'students',
-        key: 'id',
-      },
-      type: DataTypes.INTEGER.UNSIGNED,
-    },
-  },
-  { modelName: 'junctions', sequelize }
-);
+Junction.init({}, { modelName: 'junctions', sequelize });
+
+sequelize
+  .authenticate()
+  .then(async () => {
+    defineRelations();
+  })
+  .catch((e) => {
+    console.error(e);
+  });
+
+const defineRelations = () => {
+  const common = (options) => ({
+    ...options,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  });
+
+  Module.hasOne(Professor, common({ foreignKey: 'professorId' }));
+
+  Student.belongsToMany(Module, {
+    through: 'junctions',
+    foreignKey: 'studentId',
+    otherKey: 'moduleId',
+  });
+
+  Module.belongsToMany(Student, {
+    through: 'junctions',
+    otherKey: 'studentId',
+    foreignKey: 'moduleId',
+  });
+
+  Junction.belongsTo(Student, { foreignKey: 'studentId' });
+  Junction.belongsTo(Module, { foreignKey: 'moduleId' });
+};
