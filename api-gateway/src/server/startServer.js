@@ -12,6 +12,7 @@ import formatGQLErrors from './formatGQLErrors';
 const PORT = getEnv('PORT', 7000);
 
 const apolloServer = new ApolloServer({
+  context: (a) => a, // defines how gql resolver 3rd param works so that cookies work properly, idk how it works fully
   formatError: formatGQLErrors,
   resolvers,
   typeDefs,
