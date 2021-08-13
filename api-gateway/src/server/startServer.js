@@ -17,6 +17,11 @@ const apolloServer = new ApolloServer({
   formatError: formatGQLErrors,
   resolvers,
   typeDefs,
+  playground: {
+    settings: {
+      'request.credentials': 'same-origin',
+    },
+  },
 });
 
 const app = express();

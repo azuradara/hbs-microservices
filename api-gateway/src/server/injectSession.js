@@ -5,7 +5,6 @@ const injectSession = async (req, res, next) => {
     const userSession = await UsersService.fetchUserSession({
       sessionId: req.cookies.userSessionId,
     });
-
     res.locals.userSession = userSession;
   }
 

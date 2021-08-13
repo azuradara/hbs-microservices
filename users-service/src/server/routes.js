@@ -5,7 +5,7 @@ import generateUUID from '#root/helpers/generateUUID';
 import hashPassword from '#root/helpers/hashPassword';
 import passwordCompareSync from '#root/helpers/passwordCompareSync';
 
-const USER_SESSION_EXPIRATION_HOURS = 1;
+const USER_SESSION_EXPIRATION_HOURS = 20;
 
 const setupRoutes = (app) => {
   app.post('/sessions', async (req, res, next) => {
@@ -19,7 +19,6 @@ const setupRoutes = (app) => {
           email: req.body.email,
         },
       });
-      console.log(user);
 
       if (!user) return next(new Error('Invalid email.'));
 
