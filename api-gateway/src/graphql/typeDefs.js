@@ -31,6 +31,7 @@ const typeDefs = gql`
 
   type Query {
     students: [Student!]!
+    userSession(me: Boolean!): UserSession
   }
 `;
 
