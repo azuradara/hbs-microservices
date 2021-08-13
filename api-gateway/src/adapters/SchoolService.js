@@ -7,4 +7,20 @@ export default class SchoolService {
     const body = await got.get(`${SCHOOL_SERVICE_URI}/students`).json();
     return body;
   }
+
+  static async createStudent({
+    fullName,
+    cin,
+    birthDate,
+    registrationDate,
+    branch,
+  }) {
+    const body = await got
+      .post(`${SCHOOL_SERVICE_URI}/students`, {
+        json: { fullName, cin, birthDate, registrationDate, branch },
+      })
+      .json();
+
+    return body;
+  }
 }
