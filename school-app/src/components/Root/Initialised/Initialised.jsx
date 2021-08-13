@@ -45,7 +45,7 @@ const Initialised = () => {
       }
       setInit(true);
     });
-  });
+  }, []);
 
   if (!init) return 'Loading..';
 

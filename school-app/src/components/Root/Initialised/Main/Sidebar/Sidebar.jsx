@@ -27,7 +27,7 @@ const Sidebar = () => {
   const session = useSelector((state) => state.session);
 
   return (
-    <div className="flex flex-col w-64 h-screen px-4 py-8 bg-white border-r">
+    <div className="flex flex-col w-64 h-screen px-4 py-8 bg-white border-r shadow-xl">
       <h2 className="flex flex-row text-2xl font-semibold text-gray-700 items-center justify-center">
         <AcademicCapIcon className="w-12 h-12 text-christalle-500 " />
       </h2>
@@ -65,9 +65,8 @@ const Sidebar = () => {
           href="#"
           onClick={async (evt) => {
             evt.preventDefault();
-            dispatch(clearSession());
             await deleteUserSession({ variables: { sessionId: session.id } });
-            push('/login');
+            dispatch(clearSession());
           }}
         >
           <LogoutIcon className="w-5 h-5" />
