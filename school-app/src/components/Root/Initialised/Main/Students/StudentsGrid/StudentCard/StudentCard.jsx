@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Modal from '#root/components/shared/Modal';
 import ModalContent from './ModalContent';
+import formatDate from '#utils/formatDate';
 
 const StudentCard = ({ entity }) => {
   const [firstName, lastName] = entity.fullName.split(' ');
@@ -24,10 +25,14 @@ const StudentCard = ({ entity }) => {
           <div className="text-sm text-gray-500">{firstName}</div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-gray-900">{entity.birthDate}</div>
+          <div className="text-sm text-gray-900">
+            {formatDate(entity.birthDate)}
+          </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-gray-900">{entity.registrationDate}</div>
+          <div className="text-sm text-gray-900">
+            {formatDate(entity.registrationDate)}
+          </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
           {entity.branch}
