@@ -1,6 +1,7 @@
 const SET = 'professor/SET';
 const UPDATE = 'professor/UPDATE';
 const DELETE = 'professor/DELETE';
+const CREATE = 'professor/CREATE';
 
 const DEFAULT_STATE = [];
 
@@ -30,6 +31,9 @@ const professorReducer = (state = DEFAULT_STATE, action = {}) => {
         ...state.slice(0, professorIndexDelete),
         ...state.slice(professorIndexDelete + 1),
       ];
+
+    case CREATE:
+      return [...state, { ...action.payload }];
   }
   return state;
 };
@@ -49,4 +53,9 @@ export const updateProfessor = (payload) => ({
 export const deleteProfessor = (payload) => ({
   payload,
   type: DELETE,
+});
+
+export const createProfessor = (payload) => ({
+  payload,
+  type: CREATE,
 });

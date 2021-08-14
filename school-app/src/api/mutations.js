@@ -21,10 +21,20 @@ export const DELETE_USER_SESSION = gql`
 /** PROFESSORS */
 export const CREATE_PROFESSOR = gql`
   mutation ($fullName: String!, $matricule: String!, $registrationDate: Date!) {
-    id
-    fullName
-    matricule
-    registrationDate
+    createProfessor(
+      fullName: $fullName
+      matricule: $matricule
+      registrationDate: $registrationDate
+    ) {
+      id
+      fullName
+      matricule
+      registrationDate
+      modules {
+        id
+        moduleName
+      }
+    }
   }
 `;
 

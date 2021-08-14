@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Modal from '#root/components/shared/Modal';
 
+import Modal from '#root/components/shared/Modal';
 import ModalContent from './ModalContent';
 
 const ProfessorCard = ({ entity }) => {
