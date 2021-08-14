@@ -5,6 +5,7 @@ import AppGrid from '#root/components/shared/AppGrid';
 import Sidebar from './Sidebar';
 import Students from './Students';
 import Professors from './Professors';
+import Modules from './Modules';
 
 const Main = () => {
   return (
@@ -16,7 +17,7 @@ const Main = () => {
             <Route exact path="/" render={(props) => <div>yeye</div>} />
             <Route path="/professors" render={(props) => <Professors />} />
             <Route path="/students" render={(props) => <Students />} />
-            <Route path="/modules" render={(props) => <div>modules</div>} />
+            <Route path="/modules" render={(props) => <Modules />} />
           </Switch>
         </div>
       </div>

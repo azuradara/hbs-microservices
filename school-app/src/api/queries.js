@@ -47,3 +47,14 @@ export const GET_PROFESSORS = gql`
     }
   }
 `;
+
+/** MODULES */
+export const GET_MODULES = gql`
+  {
+    modules {
+      id
+      moduleName
+      coefficient
+    }
+  }
+`;
