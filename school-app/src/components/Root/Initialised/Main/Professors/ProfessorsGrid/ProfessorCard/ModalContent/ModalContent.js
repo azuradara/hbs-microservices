@@ -10,7 +10,7 @@ import {
   DELETE_PROFESSOR,
   CREATE_PROFESSOR,
 } from '#root/api/mutations';
-import { updateProfessor as setUpdatedProfessor } from '#root/store/ducks/professor';
+import { updateProfessor as setUpdateProfessor } from '#root/store/ducks/professor';
 import { deleteProfessor as setDeleteProfessor } from '#root/store/ducks/professor';
 import { createProfessor as setCreateProfessor } from '#root/store/ducks/professor';
 
@@ -42,7 +42,7 @@ const ModalContent = ({ entity, onClose, isEdit = true }) => {
             registrationDate,
           },
         });
-        dispatch(setUpdatedProfessor(updatedProfessor));
+        dispatch(setUpdateProfessor(updatedProfessor));
       } else {
         const {
           data: { createProfessor: createdProfessor },

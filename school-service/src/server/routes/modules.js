@@ -46,7 +46,7 @@ const moduleRoutes = (app) => {
 
   app.delete('/modules/:moduleId', async (req, res, next) => {
     try {
-      const module = await Professor.findByPk(req.params.moduleId);
+      const module = await Module.findByPk(req.params.moduleId);
       if (!module) return next(new Error('Invalid module ID.'));
 
       await module.destroy();

@@ -147,7 +147,6 @@ export const CREATE_MODULE = gql`
       id
       moduleName
       coefficient
-      professorId
     }
   }
 `;
@@ -168,7 +167,6 @@ export const UPDATE_MODULE = gql`
       id
       moduleName
       coefficient
-      professorId
     }
   }
 `;
