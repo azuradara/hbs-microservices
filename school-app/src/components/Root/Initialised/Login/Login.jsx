@@ -1,5 +1,4 @@
 import { useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
@@ -13,23 +12,12 @@ import { EmojiHappyIcon } from '@heroicons/react/outline';
 
 import { setSession } from '#root/store/ducks/session';
 import TextInput from '#root/components/shared/TextInput';
-
-const mutation = gql`
-  mutation ($email: String!, $password: String!) {
-    createUserSession(email: $email, password: $password) {
-      id
-      user {
-        email
-        id
-      }
-    }
-  }
-`;
+import { CREATE_USER_SESSION } from '#root/api/mutations';
 
 const Login = () => {
   const dispatch = useDispatch();
   const { push } = useHistory();
-  const [createUserSession] = useMutation(mutation);
+  const [createUserSession] = useMutation(CREATE_USER_SESSION);
 
   const {
     formState: { isSubmitting },

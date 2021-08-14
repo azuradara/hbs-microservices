@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   AcademicCapIcon,
@@ -12,16 +10,10 @@ import {
 } from '@heroicons/react/solid';
 
 import { clearSession } from '#root/store/ducks/session';
-
-const mutation = gql`
-  mutation ($sessionId: ID!) {
-    deleteUserSession(sessionId: $sessionId)
-  }
-`;
+import { DELETE_USER_SESSION } from '#root/api/mutations';
 
 const Sidebar = () => {
-  const [deleteUserSession] = useMutation(mutation);
-  const { push } = useHistory();
+  const [deleteUserSession] = useMutation(DELETE_USER_SESSION);
   const dispatch = useDispatch();
 
   const session = useSelector((state) => state.session);

@@ -1,8 +1,6 @@
-import gql from 'graphql-tag';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch } from 'react-router-dom';
-import styled from 'styled-components';
 
 import gqlClient from '#root/api/graphqlClient';
 import { setSession } from '#root/store/ducks/session';
@@ -13,24 +11,7 @@ import Login from './Login';
 import Main from './Main';
 import FullScreen from '../../shared/FullScreen';
 
-const Container = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  margin: 0 auto;
-  width: 80rem;
-`;
-
-const query = gql`
-  {
-    userSession(me: true) {
-      id
-      user {
-        id
-        email
-      }
-    }
-  }
-`;
+import { GET_USER_SESSION } from '#root/api/queries';
 
 const Initialised = () => {
   const dispatch = useDispatch();
@@ -39,7 +20,7 @@ const Initialised = () => {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
-    gqlClient.query({ query }).then(({ data }) => {
+    gqlClient.query({ query: GET_USER_SESSION }).then(({ data }) => {
       if (data.userSession) {
         dispatch(setSession(data.userSession));
       }
