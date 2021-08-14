@@ -68,3 +68,113 @@ export const DELETE_PROFESSOR = gql`
     deleteProfessor(professorId: $professorId)
   }
 `;
+
+/** STUDENTS */
+export const CREATE_STUDENT = gql`
+  mutation (
+    $fullName: String!
+    $cin: String!
+    $branch: String!
+    $birthDate: String!
+    $registrationDate: Date!
+  ) {
+    createStudent(
+      fullName: $fullName
+      cin: $cin
+      branch: $branch
+      birthDate: $birthDate
+      registrationDate: $registrationDate
+    ) {
+      id
+      fullName
+      cin
+      branch
+      birthDate
+      registrationDate
+      modules {
+        id
+        moduleName
+      }
+    }
+  }
+`;
+
+export const UPDATE_STUDENT = gql`
+  mutation (
+    $studentId: ID!
+    $fullName: String!
+    $cin: String!
+    $branch: String!
+    $birthDate: String!
+    $registrationDate: Date!
+  ) {
+    updateStudent(
+      studentId: $studentId
+      fullName: $fullName
+      cin: $cin
+      branch: $branch
+      birthDate: $birthDate
+      registrationDate: $registrationDate
+    ) {
+      id
+      fullName
+      cin
+      branch
+      birthDate
+      registrationDate
+      modules {
+        id
+        moduleName
+      }
+    }
+  }
+`;
+
+export const DELETE_STUDENT = gql`
+  mutation ($studentId: ID!) {
+    deleteStudent(studentId: $studentId)
+  }
+`;
+
+/** MODULES */
+export const CREATE_MODULE = gql`
+  mutation ($moduleName: String!, $professorId: ID, $coefficient: Float!) {
+    createModule(
+      moduleName: $moduleName
+      professorId: $professorId
+      coefficient: $coefficient
+    ) {
+      id
+      moduleName
+      coefficient
+      professorId
+    }
+  }
+`;
+
+export const UPDATE_MODULE = gql`
+  mutation (
+    $moduleId: ID!
+    $moduleName: String!
+    $professorId: ID
+    $coefficient: Float!
+  ) {
+    updateModule(
+      moduleId: $moduleId
+      moduleName: $moduleName
+      professorId: $professorId
+      coefficient: $coefficient
+    ) {
+      id
+      moduleName
+      coefficient
+      professorId
+    }
+  }
+`;
+
+export const DELETE_MODULE = gql`
+  mutation ($moduleId: ID!) {
+    deleteModule(moduleId: $moduleId)
+  }
+`;
