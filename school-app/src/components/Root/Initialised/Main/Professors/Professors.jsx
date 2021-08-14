@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { PlusIcon, SearchIcon } from '@heroicons/react/solid';
 
-import Modal from '#root/components/shared/Modal';
 import ProfessorsGrid from './ProfessorsGrid';
+import Modal from '#root/components/shared/Modal';
 import TextInput from '#root/components/shared/TextInput';
 import ModalContent from './ProfessorsGrid/ProfessorCard/ModalContent';
+
 import gqlClient from '#root/api/graphqlClient';
 import { GET_PROFESSORS } from '#root/api/queries';
 import { setProfessors } from '#root/store/ducks/professor';
@@ -15,7 +16,6 @@ const Professors = () => {
   const dispatch = useDispatch();
 
   const [param, setParam] = useState('');
-
   const [isOpen, setIsOpen] = useState(false);
 
   const list = useSelector((state) =>

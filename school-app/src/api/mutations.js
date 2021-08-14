@@ -75,7 +75,7 @@ export const CREATE_STUDENT = gql`
     $fullName: String!
     $cin: String!
     $branch: String!
-    $birthDate: String!
+    $birthDate: Date!
     $registrationDate: Date!
   ) {
     createStudent(
@@ -105,7 +105,7 @@ export const UPDATE_STUDENT = gql`
     $fullName: String!
     $cin: String!
     $branch: String!
-    $birthDate: String!
+    $birthDate: Date!
     $registrationDate: Date!
   ) {
     updateStudent(
