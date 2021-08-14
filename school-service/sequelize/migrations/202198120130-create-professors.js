@@ -14,10 +14,12 @@ module.exports.up = (queryInterface, DataTypes) => {
       },
       cin: {
         allowNull: false,
+        unique: true,
         type: DataTypes.STRING,
       },
       matricule: {
         allowNull: false,
+        unique: true,
         type: DataTypes.STRING,
       },
       registrationDate: {

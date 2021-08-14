@@ -1,6 +1,7 @@
 import React from 'react';
 
 const StudentCard = ({ entity }) => {
+  const [firstName, lastName] = entity.fullName.split(' ');
   return (
     <tr key={entity.id}>
       <td className="px-6 py-4 whitespace-nowrap">
@@ -9,9 +10,8 @@ const StudentCard = ({ entity }) => {
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm font-medium  text-gray-900">
-          {entity.fullName}
-        </div>
+        <div className="text-sm font-medium  text-gray-900">{lastName}</div>
+        <div className="text-sm text-gray-500">{firstName}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-900">{entity.birthDate}</div>
@@ -22,13 +22,13 @@ const StudentCard = ({ entity }) => {
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
         {entity.branch}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex flex-wrap gap-1">
         {entity.modules == 0 ? (
           <span>No modules :(</span>
         ) : (
           entity.modules.map((m) => (
-            <span className="bg-gray-500" key={m.id}>
-              m.moduleName
+            <span className="bg-gray-200 py-1 px-2 rounded-sm" key={m.id}>
+              {m.moduleName}
             </span>
           ))
         )}

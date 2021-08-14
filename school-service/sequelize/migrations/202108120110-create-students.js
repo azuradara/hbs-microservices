@@ -14,6 +14,7 @@ module.exports.up = (queryInterface, DataTypes) => {
       },
       cin: {
         allowNull: false,
+        unique: true,
         type: DataTypes.STRING,
       },
       birthDate: {

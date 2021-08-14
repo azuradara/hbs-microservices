@@ -20,6 +20,7 @@ module.exports.up = (queryInterface, DataTypes) => {
       },
       moduleName: {
         allowNull: false,
+        unique: true,
         type: DataTypes.STRING,
       },
       coefficient: {

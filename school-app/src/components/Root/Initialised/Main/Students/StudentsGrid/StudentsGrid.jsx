@@ -1,24 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 
 import StudentCard from './StudentCard';
 
-import gqlClient from '#root/api/graphqlClient';
-import { GET_STUDENTS } from '#root/api/queries';
-import { setStudents } from '#root/store/ducks/student';
-import CustomTable from '../../../../../shared/CustomTable';
+import CustomTable from '#root/components/shared/CustomTable';
 
-const StudentsGrid = () => {
-  const dispatch = useDispatch();
-
-  const list = useSelector((state) => state.student);
-
-  useEffect(() => {
-    gqlClient.query({ query: GET_STUDENTS }).then(({ data }) => {
-      dispatch(setStudents(data.students));
-    });
-  }, []);
-
+const StudentsGrid = ({ list }) => {
   return (
     <div className="">
       <CustomTable

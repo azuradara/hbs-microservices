@@ -13,6 +13,7 @@ Student.init(
     cin: {
       allowNull: false,
       type: DataTypes.STRING,
+      unique: true,
     },
     birthDate: {
       allowNull: false,
@@ -40,10 +41,12 @@ Professor.init(
     cin: {
       allowNull: false,
       type: DataTypes.STRING,
+      unique: true,
     },
     matricule: {
       allowNull: false,
       type: DataTypes.STRING,
+      unique: true,
     },
     registrationDate: {
       allowNull: false,
@@ -59,6 +62,7 @@ Module.init(
     moduleName: {
       allowNull: false,
       type: DataTypes.STRING,
+      unique: true,
     },
     coefficient: {
       allowNull: false,
