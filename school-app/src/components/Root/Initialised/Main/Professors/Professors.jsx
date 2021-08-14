@@ -3,37 +3,37 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { SearchIcon } from '@heroicons/react/solid';
 
-import StudentsGrid from './StudentsGrid';
+import ProfessorsGrid from './ProfessorsGrid';
 import TextInput from '#root/components/shared/TextInput';
 
 import gqlClient from '#root/api/graphqlClient';
-import { GET_STUDENTS } from '#root/api/queries';
-import { setStudents } from '#root/store/ducks/student';
+import { GET_PROFESSORS } from '#root/api/queries';
+import { setProfessors } from '#root/store/ducks/professor';
 
-const Students = () => {
+const Professors = () => {
   const dispatch = useDispatch();
 
   const [param, setParam] = useState('');
 
   const list = useSelector((state) =>
-    state.student.filter((s) => s.cin.includes(param))
+    state.professor.filter((p) => p.matricule.includes(param))
   );
 
   useEffect(() => {
-    gqlClient.query({ query: GET_STUDENTS }).then(({ data }) => {
-      dispatch(setStudents(data.students));
+    gqlClient.query({ query: GET_PROFESSORS }).then(({ data }) => {
+      dispatch(setProfessors(data.professors));
     });
   }, []);
 
   return (
     <>
       <div className="flex justify-between items-center">
-        <h1 className="text-xl">Students</h1>
+        <h1 className="text-xl">Professors</h1>
         <div>
           <TextInput
             name="search"
             type="text"
-            placeholder="Seach by CIN"
+            placeholder="Seach by Matricule"
             autoFocus
             autoComplete="off"
             icon={SearchIcon}
@@ -45,9 +45,9 @@ const Students = () => {
         </div>
       </div>
       <hr className="my-6 border-gray-300" />
-      <StudentsGrid list={list} />
+      <ProfessorsGrid list={list} />
     </>
   );
 };
 
-export default Students;
+export default Professors;

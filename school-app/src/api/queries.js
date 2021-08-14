@@ -30,3 +30,20 @@ export const GET_STUDENTS = gql`
     }
   }
 `;
+
+/** PROFESSORS */
+export const GET_PROFESSORS = gql`
+  {
+    professors {
+      id
+      fullName
+      matricule
+      registrationDate
+      modules {
+        id
+        moduleName
+        coefficient
+      }
+    }
+  }
+`;
