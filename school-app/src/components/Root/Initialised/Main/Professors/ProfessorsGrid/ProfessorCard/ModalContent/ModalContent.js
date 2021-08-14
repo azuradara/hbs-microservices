@@ -5,12 +5,15 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
 import TextInput from '#root/components/shared/TextInput';
-import { UPDATE_PROFESSOR } from '#root/api/mutations';
+import { UPDATE_PROFESSOR, DELETE_PROFESSOR } from '#root/api/mutations';
+import { updateProfessor as setUpdatedProfessor } from '#root/store/ducks/professor';
+import { deleteProfessor as setDeleteProfessor } from '#root/store/ducks/professor';
 
-const ModalContent = ({ entity }) => {
+const ModalContent = ({ entity, onClose }) => {
   const dispatch = useDispatch();
 
   const [updateProfessor] = useMutation(UPDATE_PROFESSOR);
+  const [deleteProfessor] = useMutation(DELETE_PROFESSOR);
 
   const {
     formState: { isSubmitting },
@@ -30,8 +33,22 @@ const ModalContent = ({ entity }) => {
           registrationDate,
         },
       });
+
+      dispatch(setUpdatedProfessor(updatedProfessor));
+      onClose();
     }
   );
+
+  const handleDelete = async () => {
+    await deleteProfessor({
+      variables: {
+        professorId: parseInt(entity.id),
+      },
+    });
+
+    dispatch(setDeleteProfessor(entity.id));
+    onClose();
+  };
 
   return (
     <div className="max-w-md w-full mx-2 bg-white p-4 flex flex-col px-4 py-8 sm:px-6 md:px-8 lg:px-10">
@@ -74,6 +91,13 @@ const ModalContent = ({ entity }) => {
         >
           Submit
         </button>
+
+        <div
+          onClick={() => handleDelete()}
+          className="mt-2 py-2 px-4 cursor-pointer bg-gray-200 hover:bg-gray-300 focus:ring-christalle-400 focus:ring-offset-christalle-200 text-gray-700 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-md "
+        >
+          Delete
+        </div>
       </form>
     </div>
   );

@@ -10,7 +10,7 @@ const ProfessorCard = ({ entity }) => {
   return (
     <>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <ModalContent entity={entity} />
+        <ModalContent entity={entity} onClose={() => setIsOpen(false)} />
       </Modal>
 
       <tr key={entity.id}>

@@ -45,12 +45,16 @@ export const UPDATE_PROFESSOR = gql`
       fullName
       matricule
       registrationDate
+      modules {
+        id
+        moduleName
+      }
     }
   }
 `;
 
 export const DELETE_PROFESSOR = gql`
   mutation ($professorId: ID!) {
-    null
+    deleteProfessor(professorId: $professorId)
   }
 `;
