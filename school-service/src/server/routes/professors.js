@@ -14,18 +14,12 @@ const professorRoutes = (app) => {
   });
 
   app.post('/professors', async (req, res, next) => {
-    if (
-      !req.body.fullName ||
-      !req.body.cin ||
-      !req.body.matricule ||
-      !req.body.registrationDate
-    )
+    if (!req.body.fullName || !req.body.matricule || !req.body.registrationDate)
       return next(new Error('Invalid Body'));
 
     try {
       const newProfessor = await Professor.create({
         fullName: req.body.fullName,
-        cin: req.body.cin,
         matricule: req.body.matricule,
         registrationDate: req.body.registrationDate,
       });

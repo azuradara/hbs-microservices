@@ -63,10 +63,10 @@ export default class SchoolService {
     return body;
   }
 
-  static async createProfessor({ fullName, cin, matricule, registrationDate }) {
+  static async createProfessor({ fullName, matricule, registrationDate }) {
     const body = await got
       .post(`${SCHOOL_SERVICE_URI}/professors`, {
-        json: { fullName, cin, matricule, registrationDate },
+        json: { fullName, matricule, registrationDate },
       })
       .json();
 

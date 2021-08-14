@@ -6,10 +6,11 @@ const TextInput = React.forwardRef(
     return (
       <div className="flex flex-col mb-2">
         <div className="flex relative gap-1">
-          <span className="rounded-md inline-flex  items-center px-3 border-t bg-white border  border-gray-300 text-gray-500 shadow-sm text-sm">
-            {Icon && <Icon className="h-4 w-4" />}
-          </span>
-
+          {Icon && (
+            <span className="rounded-md inline-flex  items-center px-3 border-t bg-white border  border-gray-300 text-gray-500 shadow-sm text-sm">
+              <Icon className="h-4 w-4" />
+            </span>
+          )}
           <input
             {...rest}
             type={type}

@@ -38,11 +38,6 @@ Professor.init(
       allowNull: false,
       type: DataTypes.STRING,
     },
-    cin: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      unique: true,
-    },
     matricule: {
       allowNull: false,
       type: DataTypes.STRING,

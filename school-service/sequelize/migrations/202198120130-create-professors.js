@@ -12,11 +12,6 @@ module.exports.up = (queryInterface, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      cin: {
-        allowNull: false,
-        unique: true,
-        type: DataTypes.STRING,
-      },
       matricule: {
         allowNull: false,
         unique: true,
